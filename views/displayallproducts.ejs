@@ -97,8 +97,9 @@
                     <td><%=item.description %></td>
                     <td><s><%=item.price %>/</s><%=item.offer %></td>
                     <td><%=item.quantity %>/<%=item.quantitytype %></td>
-                    <td><img src="/images/<%=item.productpicture%>" style="width:60px; height:60px; border-radius: 30px;"/> </td>
-                    <td><a href="/products/displayforedit?productid=<%=item.productid %>" style="text-decoration:none;" ><img src="/images/edit.png" style="width:30px; height:30px; "/> </a></td>
+                    <td><a href="/products/displaypictureforedit?productid=<%=item.productid %>&productname=<%=item.productname %>&picture=<%=item.productpicture %>" style="text-decoration:none;"><img src="/images/<%=item.productpicture%>" style="width:60px; height:60px; border-radius: 30px;"/> </a></td>
+                    <td><a href="/products/displaypictureforedit?productid=<%=item.productid %>&productname=<%=item.productname %>&picture=<%=item.productpicture %>" style="text-decoration:none;" ><img src="/images/edit.png" style="width:30px; height:30px; "/> </a></td>
+                    
                 </tr>
                  <% }) %>
                 </table>

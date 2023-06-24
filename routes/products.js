@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pool=require('./pool')
+var fs=require("fs")
 var upload=require('./multer')
 /* GET home page. */
 router.get('/product_interface',function(req,res,next) {
@@ -96,7 +97,6 @@ router.get('/displayforedit',function(req,res,next) {
   
   try{
    
-    
     pool.query( "select P.* ,(select PT.producttypename from producttype  PT where PT.producttypeid=P.producttypeid) as producttypename,(select PC.productcategoryname from productcategory PC where PC.productcategoryid=P.productcategoryid) as productcategoryname from products P where P.productid=?",[req.query.productid],function(error,result) {
       if(error)
       { console.log( "D error",error);
@@ -122,7 +122,7 @@ router.post('/edit_product',function(req,res){
     {
     pool.query(" update products set productname=?, producttypeid=?, productcategoryid=?, description=?, price=?, offer=?, quantity=?, quantitytype=? where productid=?",[req.body.productname, req.body.producttypeid, req.body.productcategoryid, req.body.description, req.body.price, req.body.offer, req.body.quantity, req.body.quantitytype,req.body.productid],function(error,result){
       if(error)
-      { console.log(error)
+      { console.log(error);
         res.redirect('/products/fetch_all_products');
       }
       else
@@ -131,13 +131,56 @@ router.post('/edit_product',function(req,res){
       }
     });
   }
+      else
+      {
 
-  }
-  catch(e)
-  
+        pool.query("delete from products where  productid=? ",[req.body.productid],function(error,result){
+          if(error)
+          { console.log(error);
+            res.redirect('/products/fetch_all_products');
+          }
+          else
+          {
+            res.redirect('/products/fetch_all_products');
+          }
+        });
+
+      }
+     } catch(e) {
   { console.log("Error",e);
   res.redirect('/products/fetch_all_products');
   }
- 
+}
 });
-module.exports = router;
+router.get('/displaypictureforedit',function(req,res,next) {
+  res.render('displaypictureforedit',{data:req.query})
+})
+
+
+router.post('/edit_picture',upload.single('productpicture'),function(req,res){
+ 
+  
+  try{
+    
+    pool.query(" update product set productpicture=? where productid=? ",[req.body.productid,req.file.filename],function(error,result){
+      if(error)
+      { console.log(error);
+        res.redirect('/products/fetch_all_products');
+      }
+      else
+      {
+        fs.unlink(`/images/${req.body.oldfilename}`)
+        res.redirect('/products/fetch_all_products');
+      }
+    });
+  
+     
+     } catch(e) {
+  { console.log("Error",e);
+  res.redirect('/products/fetch_all_products');
+  }
+}
+});
+
+
+module.exports= router;
