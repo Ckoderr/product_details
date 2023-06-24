@@ -1,0 +1,135 @@
+<style>
+    .maincontainer{
+        background:#bdc3c7;
+        width: 100%;
+        height:100%;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+    }
+    .box{
+        background:#fff;
+        width:50%;
+        height:auto;
+        border-radius: 10px;
+        padding-left:20px;
+        padding-right:20px;
+      flex-direction: row;
+
+    }
+.heading {
+    font-size: 24px;
+    font-weight:bold;
+    font-family: oswald;
+    padding: 5px;
+justify-content: space-between;
+    letter-spacing: 1;
+}
+.image{width:50px;
+            height:50px}
+    .headingdiv{
+        display:flex;
+        align-items: center;
+        flex-direction:row;
+    }.formDiv{
+        margin:5px;
+    }
+    .gap{margin-bottom: 10px;}
+    .btnstyle{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+    
+
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+ <script src=" https://code.jquery.com/jquery-3.7.0.min.js"></script>
+ <script src="/javascripts/project.js"></script>
+    </head>
+    <body>
+        <form action="/products/displayforedit" enctype="multipart/form-data" method="post">
+            <div class="maincontainer">
+            <div class="box">
+                <div class="headingdiv">
+                <div style="display:flex;flex-direction: row;">
+                <div><img src="/images/logo.jpg" class="image"></div>
+                <div class="heading">Product Register</div>
+                </div>
+                <div><a href="/products/fetch_all_product" style="text-decoration:none;"><img src='/images/display.png' style="width: 40px;"></a></div>
+                </div>
+                <div class="formDiv">
+                    <div class="row gap" >
+                        <div class="col-md-12">
+                            <input required type="text" class="form-control" name="productname" placeholder="Enter Product Name..." value="<%=data.productname %>">
+
+                </div>
+                </div>
+                <div class="row gap" >
+                        <div class="col-md-6">
+                            <select required class="form-select" id="producttypeid" name="producttypeid" area-label="Quantity type">
+                                <option selected  value="<%=data.producttypeid %>"><%=data.producttypename %></option>
+                              </select>
+                              
+               </div>
+                 <div class="col-md-6">
+                    <select required class="form-select" id="productcategoryid" name="productcategoryid" area-label="Quantity type">
+                        <option selected  value="<%=data.productcategoryid %>"><%=data.productcategoryname %></option>
+                      </select>
+                      
+            </div>
+            </div>
+            <div class="row gap" >
+                <div class="col-md-12">
+                    <input required type="text" class="form-control" name="description" placeholder="Description..." value="<%=data.description %>">
+                </div>
+                </div>
+                <div class="row gap" >
+                    <div class="col-md-6">
+                     
+                        <input  required type="text" class="form-control" name="price" placeholder=" product price "  value="<%=data.price%>">
+           </div>
+           
+             <div class="col-md-6">
+                <input required type="text" class="form-control" name="offer" placeholder="product offer"  value="<%=data.offer %>">
+        </div>
+        </div>
+
+        <div class="row gap" >
+            <div class="col-md-6">
+                <input required type="text" class="form-control" name="quantity" placeholder="  Quantity "  value="<%=data.quantity %>">
+      </div>
+     <div class="col-md-6">
+        <select required class="form-select" name="quantitytype" area-label="Quantity type">
+            <option selected><%=data.quantitytype %></option>
+            <option >kg</option>
+            <option >g</option>
+            <option >ml</option>
+            <option >ltre</option>
+            <option >unit</option>
+          </select>
+</div>
+</div>
+
+         <div class="row gap " >
+            <div class="col-md-6 btnstyle">
+                <button style="width:300px" type="submit" class="btn btn-primary">Edit</button>
+                
+   </div>
+     <div class="col-md-6 btnstyle">
+        <button style=" width:300px" type="reset" class="btn btn-primary">Delete</button>
+   </div>
+        </div>
+
+        </div>
+        </div>
+        </form>
+    </body>
+</html>
