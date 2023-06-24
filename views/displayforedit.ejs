@@ -55,7 +55,8 @@ justify-content: space-between;
  <script src="/javascripts/project.js"></script>
     </head>
     <body>
-        <form action="/products/displayforedit" enctype="multipart/form-data" method="post">
+        <form action="/products/edit_product"  method="post">
+            <input type="hidden" name="productid" value="<%=data.productid %>">
             <div class="maincontainer">
             <div class="box">
                 <div class="headingdiv">
@@ -120,11 +121,11 @@ justify-content: space-between;
 
          <div class="row gap " >
             <div class="col-md-6 btnstyle">
-                <button style="width:300px" type="submit" class="btn btn-primary">Edit</button>
+                <button style="width:300px" type="submit" name="btn" value="Edit" class="btn btn-primary">Edit</button>
                 
    </div>
      <div class="col-md-6 btnstyle">
-        <button style=" width:300px" type="reset" class="btn btn-primary">Delete</button>
+        <button style=" width:300px" type="reset" name="btn" value="Delete" class="btn btn-primary">Delete</button>
    </div>
         </div>
 
