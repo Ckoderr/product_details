@@ -114,6 +114,7 @@ router.get('/displayforedit',function(req,res,next) {
       else
       {
         res.render("displayforedit",{data:result[0],message:"Success"});
+        res.render("displayforedit",{data:result[0],message:"Success"});
       }
     })
   }
