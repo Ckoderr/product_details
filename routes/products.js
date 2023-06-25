@@ -116,7 +116,6 @@ router.get('/displayforedit',function(req,res,next) {
 });
 router.post('/edit_product',function(req,res){
  
-  
   try{
     if(req.body.btn=="Edit")
     {
@@ -156,31 +155,27 @@ router.get('/displaypictureforedit',function(req,res,next) {
   res.render('displaypictureforedit',{data:req.query})
 })
 
-
 router.post('/edit_picture',upload.single('productpicture'),function(req,res){
  
-  
   try{
     
-    pool.query(" update product set productpicture=? where productid=? ",[req.body.productid,req.file.filename],function(error,result){
+    pool.query(" update products set productpicture=? where productid=? ",[req.file.filename,req.body.productid],function(error,result){
       if(error)
-      { console.log(error);
+      { console.log("D Error",error);
         res.redirect('/products/fetch_all_products');
       }
       else
       {
-        fs.unlink(`/images/${req.body.oldfilename}`)
+        fs.unlinkSync(`D:/product_details/public/images/${req.body.oldfilename}`);
         res.redirect('/products/fetch_all_products');
       }
     });
   
-     
      } catch(e) {
-  { console.log("Error",e);
+  { console.log(" D Error",e);
   res.redirect('/products/fetch_all_products');
   }
 }
 });
-
 
 module.exports= router;
